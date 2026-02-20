@@ -305,6 +305,7 @@ fun AppUI(espIpAddress: String, onEspIpAddressChange: (String) -> Unit) {
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Spacer(Modifier.height(16.dp))
+
         // Prikaz trenutne ESP IP adrese
         Text(
             text = "ПЕЖО dashboard",
@@ -313,7 +314,29 @@ fun AppUI(espIpAddress: String, onEspIpAddressChange: (String) -> Unit) {
             fontSize = 32.sp
         )
         Spacer(Modifier.height(24.dp))
+        OutlinedTextField(
+            value = currentEspIp,
+            onValueChange = {
+                currentEspIp = it
+                onEspIpAddressChange(it)
+            },
+            label = { Text("ESP IP", color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f)) },
+            placeholder = { Text("") },
+            singleLine = true,
+            modifier = Modifier
+                .width(360.dp)
+                .padding(horizontal = 8.dp),
+            shape = RoundedCornerShape(12.dp),
+            colors = OutlinedTextFieldDefaults.colors(
+                focusedBorderColor = MaterialTheme.colorScheme.primary,
+                unfocusedBorderColor = MaterialTheme.colorScheme.outline,
+                focusedTextColor = MaterialTheme.colorScheme.onSurface,
+                unfocusedTextColor = MaterialTheme.colorScheme.onSurface,
+                cursorColor = MaterialTheme.colorScheme.primary
+            )
+        )
 
+        Spacer(Modifier.height(16.dp))
         ColorPickerBox(
             title = "Primary Color",
             controller = color1Controller,
